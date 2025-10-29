@@ -3,8 +3,8 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 
-// Import game logic from Next.js project
-const game = require('../ipl-auction-next/lib/game');
+// Import game logic from local lib
+const game = require('./lib/game');
 
 const app = express();
 const server = http.createServer(app);
