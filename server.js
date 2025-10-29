@@ -37,16 +37,8 @@ io.on('connection', (socket) => {
   socket.on('choose-team', (data) => game.chooseTeam(io, socket, data));
   socket.on('follow', (data) => game.follow(io, socket, data));
 
-  // Cleanup ghost users on disconnect to keep confirmations accurate
-  socket.on('disconnect', () => {
-    const room = socket?.data?.room;
-    const username = socket?.data?.username;
-    if (room && username) {
-      try {
-        game.exitUser(io, socket, { room, user: username });
-      } catch (e) {}
-    }
-  });
+  // Do not remove users on disconnect; allow reload to restore via check-user
+  socket.on('disconnect', () => {});
 
   // Utility
   socket.on('list-auctions', () => {
